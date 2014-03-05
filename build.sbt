@@ -1,10 +1,10 @@
 name := "prequel"
 
-version := "0.3.8"
+version := "0.3.9"
 
 organization := "net.noerd"
 
-scalaVersion := "2.9.3"
+scalaVersion := "2.10.3"
 
 // Runtime Dependencies
 libraryDependencies ++= Seq(
