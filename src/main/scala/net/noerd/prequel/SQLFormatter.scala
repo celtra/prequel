@@ -60,8 +60,8 @@ object SQLFormatter {
     val HSQLDBSQLFormatter = SQLFormatter(
         DateTimeFormat.forPattern( "yyyy-MM-dd HH:mm:ss.SSSS" )
     )
-        
-    private[ prequel ] def apply( 
+
+    private[ prequel ] def apply(
         timeStampFormatter: DateTimeFormatter = ISODateTimeFormat.dateTimeNoMillis,
         binaryFormatter: BinaryFormatter = new BinaryFormatter()
     ) = {
@@ -73,7 +73,10 @@ class BinaryFormatter {
     /**
      * Print to hexadecimal format
      */
-    def print( value: Array[Byte] ): String = value.map("%02X" format _).mkString
+    def print( value: Array[Byte] ): String = value match {
+        case Array() => "" // On empty array return an empty string
+        case _ => "0x" + (value.map("%02X" format _).mkString)
+    }
 }
 
 object SQLFormatterImplicits {

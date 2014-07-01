@@ -53,7 +53,7 @@ class FormattablesSpec extends FunSpec with ShouldMatchers {
         ),
         ( "BinaryFormattable should escape and convert defined formattable to hexadecimal format",
             BinaryFormattable( "Lorem Ipsum".getBytes ),
-            "'4C6F72656D20497073756D'"
+            "0x4C6F72656D20497073756D"
         )
     )
 

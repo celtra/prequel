@@ -176,7 +176,7 @@ object DurationFormattable{
 //
 class BinaryFormattable( val value: Array[Byte] ) extends Formattable {
     override def escaped( formatter: SQLFormatter ): String = {
-        formatter.toSQLString( formatter.binaryFormatter.print( value ) )
+        formatter.binaryFormatter.print( value )
     }
     override def addTo( statement: ReusableStatement ): Unit = {
         statement.addBinary( value )

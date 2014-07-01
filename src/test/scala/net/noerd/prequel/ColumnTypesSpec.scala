@@ -89,8 +89,10 @@ class FloatColumnTypeSpec extends ColumnTypeSpec[ Float ] {
     def columnTypeFactory = FloatColumnType
 }
 
+/*
+// This solution is mysql specific
 class BinaryColumnTypeSpec extends ColumnTypeSpec[ Array[Byte] ] {
     def sqlType = "varbinary(255)"
     val testValue = BinaryFormattable("test binary content".getBytes)
     def columnTypeFactory = BinaryColumnType
-}
+}*/
