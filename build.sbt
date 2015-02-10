@@ -1,8 +1,9 @@
 import ohnosequences.sbt.SbtS3Resolver._
+import com.amazonaws.services.s3.model.CannedAccessControlList
 
 name := "prequel"
 
-version := "0.3.10"
+version := "0.3.11"
 
 organization := "com.celtra"
 
@@ -30,9 +31,11 @@ libraryDependencies ++= Seq(
 // Release publishing stuff
 S3Resolver.defaults
 
-publishTo := Some(s3resolver.value("Celtra S3 bucket", s3("files.celtra-test.com/maven")) withIvyPatterns)
+publishTo := Some(s3resolver.value("Celtra S3 bucket", s3("files.celtra.com/maven")) withIvyPatterns)
 
 s3credentials := file(System.getProperty("user.home")) / ".sbt" / ".s3credentials"
+
+s3acl := CannedAccessControlList.PublicRead
 
 pomIncludeRepository := { _ => false }
 
