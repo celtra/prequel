@@ -1,3 +1,5 @@
-//resolvers += Resolver.url("scalasbt", new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases"))(Resolver.ivyStylePatterns)
+resolvers += "Era7 maven releases" at "http://releases.era7.com.s3.amazonaws.com"
 
-//addSbtPlugin("com.jsuereth" % "xsbt-gpg-plugin" % "0.5")
+resolvers += "Celtra" at "http://files.celtra.com/maven"
+
+addSbtPlugin("ohnosequences" % "sbt-s3-resolver" % "0.13.1")

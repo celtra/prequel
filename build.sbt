@@ -1,18 +1,25 @@
+import ohnosequences.sbt.SbtS3Resolver._
+import com.amazonaws.services.s3.model.CannedAccessControlList
+
 name := "prequel"
 
-version := "0.3.9"
+version := "0.3.11"
 
-organization := "net.noerd"
+organization := "com.celtra"
 
 scalaVersion := "2.10.3"
+
+scalacOptions ++= Seq(
+    "-Xmax-classfile-name", "140"
+)
 
 // Runtime Dependencies
 libraryDependencies ++= Seq(
     "commons-pool" % "commons-pool" % "1.5.5",
     "commons-dbcp" % "commons-dbcp" % "1.4",
     "commons-lang" % "commons-lang" % "2.6",
-    "joda-time" % "joda-time" % "2.1",
-    "org.joda" % "joda-convert" % "1.2"
+    "joda-time" % "joda-time" % "2.6",
+    "org.joda" % "joda-convert" % "1.7"
 )
 
 // Test Dependencies
@@ -22,17 +29,22 @@ libraryDependencies ++= Seq(
 )
 
 // Release publishing stuff
+S3Resolver.defaults
 
-publishTo := Some( "Sonatype Staging Nexus" at "https://oss.sonatype.org/service/local/staging/deploy/maven2" )
+publishTo := Some(s3resolver.value("Celtra S3 bucket", s3("files.celtra.com/maven")) withIvyPatterns)
+
+s3credentials := file(System.getProperty("user.home")) / ".sbt" / ".s3credentials"
+
+s3acl := CannedAccessControlList.PublicRead
 
 pomIncludeRepository := { _ => false }
 
-publishMavenStyle := true
+publishMavenStyle := false
 
 credentials += Credentials( Path.userHome / ".ivy2" / ".credentials" )
 
-pomExtra := (
-  <url>http://github.com/jpersson/prequel</url>
+pomExtra :=
+  <url>http://github.com/celtra/prequel</url>
   <licenses>
     <license>
       <name>wtfpl</name>
@@ -41,8 +53,8 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/jpersson/prequel.git</url>
-    <connection>scm:git:https://github.com/jpersson/prequel.git</connection>
+    <url>https://github.com/celtra/prequel.git</url>
+    <connection>scm:git:https://github.com/celtra/prequel.git</connection>
   </scm>
   <developers>
     <developer>
@@ -51,4 +63,3 @@ pomExtra := (
       <url>http://github.com/jpersson</url>
     </developer>
   </developers>
-)
